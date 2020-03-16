@@ -1,11 +1,8 @@
 package com.example.springbootjpaexamples.example02;
 
-import ch.qos.logback.core.pattern.color.MagentaCompositeConverter;
-import com.example.springbootjpaexamples.example01.User;
 import com.example.springbootjpaexamples.example02.onetomany.Address02;
 import com.example.springbootjpaexamples.example02.onetomany.User02;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.weaver.NameMangler;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +10,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.swing.text.html.parser.Entity;
 
 @Slf4j
 @SpringBootTest
