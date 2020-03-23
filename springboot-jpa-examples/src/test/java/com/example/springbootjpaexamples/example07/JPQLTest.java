@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -74,5 +76,13 @@ public class JPQLTest {
     public void find_user() {
         user07Repository.findByName("BO")
                 .forEach(user07 -> log.debug("{}",user07.getId()));
+    }
+
+    @Test
+    public  void test_page() {
+        // 从哪开始，查多少个
+        address07Repository.list("956", PageRequest.of(0, 20))
+                .getContent()
+                .forEach(address07 -> log.debug("{}", address07.getUser().getName()));
     }
 }
