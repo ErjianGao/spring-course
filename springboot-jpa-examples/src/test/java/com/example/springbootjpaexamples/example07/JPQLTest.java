@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Repository;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ public class JPQLTest {
     @Autowired
     private Address07Repository address07Repository;
 
+    // 查询不需要启动事务
     @Transactional
     @Rollback(value = false)
     @Test
@@ -84,5 +86,13 @@ public class JPQLTest {
         address07Repository.list("956", PageRequest.of(0, 20))
                 .getContent()
                 .forEach(address07 -> log.debug("{}", address07.getUser().getName()));
+    }
+
+    // 完成持久化操作必需有事务
+    @Transactional
+    @Rollback(value = false)
+    @Test
+    public void test_update() {
+        user07Repository.update(1, "ZHANG");
     }
 }
