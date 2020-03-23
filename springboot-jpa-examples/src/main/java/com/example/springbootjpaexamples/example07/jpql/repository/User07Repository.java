@@ -11,4 +11,7 @@ public interface User07Repository extends BaseRepository<User07, Integer> {
     // 参数变量用:声明
     @Query("FROM User07 u WHERE u.name=:name")
     List<User07> list(@Param("name") String username);
+
+    // 通过规约实现
+    List<User07> findByName(String name);
 }

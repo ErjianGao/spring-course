@@ -69,4 +69,10 @@ public class JPQLTest {
         address07Repository.list("956", "BO")
                 .forEach(a -> log.debug("{}", a.getId()));
     }
+
+    @Test
+    public void find_user() {
+        user07Repository.findByName("BO")
+                .forEach(user07 -> log.debug("{}",user07.getId()));
+    }
 }
