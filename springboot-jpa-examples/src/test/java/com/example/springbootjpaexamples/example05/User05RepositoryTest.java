@@ -8,6 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import java.util.PrimitiveIterator;
+
 @SpringBootTest
 @Slf4j
 // 所有的public方法都是支持事务的
@@ -16,6 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class User05RepositoryTest {
     @Autowired
     private User05Repository user05Repository;
+
+    @Autowired
+    private EntityManager manager;
 
     @Test
     public void test_addUser() {
@@ -61,5 +67,35 @@ public class User05RepositoryTest {
         log.debug("{}", user05.getId());
         // 新建状态同步到undo表中，时间戳等数据库自己生成的回不来
         log.debug("{}", user05.getName());
+    }
+
+    @Test
+    public void test_refresh() {
+        User05 user05 = new User05();
+        user05.setName("sun");
+        // 直接存到持久化层
+        manager.persist(user05);
+        // 执行此方法后，可以把数据库中的记录同步回来
+        manager.refresh(user05);
+        // 在持久化上下文中改成了bo，但是数据库undo表中还是sun
+        user05.setName("bo");
+        manager.refresh(user05);
+        // 经过从数据库强制拿记录，现在的username是sun
+        log.debug("{}", user05.getName());
+        log.debug("{}", user05.getId());
+        log.debug("{}", user05.getLocalDateTime());
+
+    }
+
+    @Test
+    public void test_refresh02() {
+        User05 user05 = new User05();
+        user05.setName("sun");
+        user05Repository.save(user05);
+        // 使用基于自己实现的refresh方法
+        user05Repository.refresh(user05);
+        log.debug("{}", user05.getName());
+        log.debug("{}", user05.getId());
+        log.debug("{}", user05.getLocalDateTime());
     }
 }
