@@ -15,6 +15,7 @@ public class User05 {
     private int id;
     private String name;
 
+    // 数据库生成时间戳
     @Column(columnDefinition = "timestamp default current_timestamp",
             insertable = false,
             updatable = false)
