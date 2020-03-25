@@ -1,6 +1,6 @@
 package com.example.springbootspringmvcexamples.example01;
 
-import com.example.springbootspringmvcexamples.entity.Address;
+import com.example.springbootspringmvcexamples.example01.entity.Address;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

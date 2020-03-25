@@ -1,4 +1,4 @@
-package com.example.springbootspringmvcexamples.entity;
+package com.example.springbootspringmvcexamples.example01.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
