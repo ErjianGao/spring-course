@@ -32,6 +32,31 @@ public class ExampleController01 {
     public Map postAddress(@RequestBody Address address) {
         log.debug(address.getDetail());
         log.debug(address.getComment());
-        return Map.of(); 
+        return Map.of();
+    }
+
+    @PostMapping("addresses02")
+    public Map postAddress02(@RequestBody Address address) {
+        log.debug(address.getDetail());
+        log.debug(address.getComment());
+        return Map.of();
+    }
+
+    // 通过大括号描述变量
+    @GetMapping("addresses/{aid}")
+    public Map getAddress(@PathVariable int aid) {
+        Address address = ADDRESSES.stream()
+                .filter(a -> a.getId() == aid)
+                .findFirst()
+                .orElse(new Address()); // 注意这里MAP里不能为空
+        return Map.of("address", address);
+    }
+
+    private final List<Address> ADDRESSES = create();
+    private List<Address> create() {
+        Address address01 = new Address(1, "956", "a", LocalDateTime.now());
+        Address address02 = new Address(2, "956", "b", LocalDateTime.now());
+        Address address03 = new Address(3, "956", "c", LocalDateTime.now());
+        return List.of(address01, address02, address03);
     }
 }

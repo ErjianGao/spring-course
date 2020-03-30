@@ -1,5 +1,6 @@
 package com.example.springbootspringmvcexamples.example01.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
