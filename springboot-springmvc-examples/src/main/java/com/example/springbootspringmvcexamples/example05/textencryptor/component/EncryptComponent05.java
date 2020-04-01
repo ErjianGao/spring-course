@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
@@ -25,6 +26,8 @@ public class EncryptComponent05 {
     @Autowired
     private ObjectMapper objectMapper;
 
+    // 不声明为组件的话没法注入
+    @Bean
     public TextEncryptor getTextEncryptor() {
         // 添加密钥和盐值
         return Encryptors.text(SecretKey, salt);
